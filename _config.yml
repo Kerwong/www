@@ -1,18 +1,17 @@
-# He1xo Configuration
+# Hexo Configuration
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: Ushindi
+subtitle: Hakuna Matata
 description:
-author: John Doe
-language:
-timezone:
+author: Alex Wang
+language: zh-CN
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://wenchao.wang
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -72,9 +71,70 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: nlvi
+
+# Plugins
+markdown_it_plus:
+  highlight: true
+  html: true
+  xhtmlOut: true
+  breaks: true
+  langPrefix:
+  linkify: true
+  typographer:
+  quotes: “”‘’
+  plugins:
+    - plugin:
+        name: markdown-it-katex
+        enable: true
+    - plugin:
+        name: markdown-it-mark
+        enable: false
+
+#  neat，自动压缩html, css, js
+neatenable: true
+neat_html:
+  enable: true
+  exclude:
+neat_css:
+  enable: true
+  exclude:
+    - '*.min.css'
+neat_js:
+  enable: true
+  exclude:
+    - '*.min.js'
+
+# 
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+baidu_url_submit:
+  count: 5
+  host: wenchao.wang
+
+sitemap:
+  path: sitemap.xml
+
+baidusitemap:
+  path: baidusitemap.xml
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: rsync
+  host: 101.132.144.92
+  user: www
+  root: /home/www
+  port: 22
+  delete: true
+  verbose: true
+  ignore_errors: false
