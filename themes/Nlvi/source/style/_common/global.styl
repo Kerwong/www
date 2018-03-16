@@ -1,0 +1,47 @@
+*
+  outline none
+  box-sizing border-box
+
+::-webkit-scrollbar
+  width 6px
+  height 1px
+
+::-webkit-scrollbar-track
+::-webkit-scrollbar-thumb
+  border-radius 3px
+  background-color $theme-color-selection
+
+::-webkit-scrollbar-thumb
+  background-color $theme-color-selection-highlight
+
+::selection
+  background-color rgba($theme-color-main, .2)
+
+::-webkit-selection
+  background-color rgba($theme-color-main, .2)
+
+body
+  font-family $article-fonts
+  -webkit-font-smoothing antialiased
+  -webkit-overflow-scrolling touch
+  background-color $global-setting['background']
+
+a
+  -webkit-tap-highlight-color transparent
+
+.post-content
+	> table
+		border-collapse collapse
+		margin auto
+		th
+		td
+			border 1px solid
+			padding 5px
+	li
+		line-height 1.6
+	figure
+		font-size 14px
+
+for $k, $v in $heading-list
+  {$k}
+    font-size $v
