@@ -30,7 +30,7 @@ scheme: banderole
 ## Banderole
 # Header Style
 # line | block
-header-style: line
+header-style: block
 
 # Article Header Sign
 header_sign: §
@@ -49,7 +49,7 @@ toc: true
 # Use copyright infomation
 copyright:
   enable: true
-  # license: 
+  license: ''
 
 #Reword button or message(fill your QRCode of any Pay.)
 reward: 
