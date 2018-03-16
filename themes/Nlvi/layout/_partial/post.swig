@@ -47,6 +47,7 @@
           <span>{{ __('page.readmore') }}</span>
         </a>
       </p>
+	  <p><br/><hr /></p>
     {% endif %}
     </div>
     {% if is_post() %}

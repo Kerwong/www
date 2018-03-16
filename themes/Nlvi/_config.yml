@@ -123,7 +123,7 @@ since: 2016
 # plugins:
 
 # about
-# self:  
+# self: 123  
 
 # ===========================================
 # Search Settings
@@ -133,11 +133,11 @@ since: 2016
 search: true
 
 greetings:
-  morning: '我的博客里可没有早饭！'
-  noon: '记得午休吃饭，不着急看我的博客~'
-  after: '下午好，感谢查阅我的博客'
-  night: '您来我的博客看笑话当做休息嘛'
-  midnight: '我觉得大半夜就不要看啦'
+  morning: '一天之计在于晨，每天都有加油哦~'
+  noon: '该去吃午饭啦，食堂又要没菜了！'
+  after: '下午茶搭配 Coding 才是最佳之选'
+  night: '天黑和效率成正比，这样不好不好！'
+  midnight: '年轻人，不要老熬夜'
 
 # ===========================================
 # Documents Styles
