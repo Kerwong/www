@@ -26,7 +26,7 @@ tags:
 
 根据前面描述的场景，可以写出 *PlusCal* 代码如下：
 
-```PlusCal
+```tla
 ----------------------------- MODULE BankTransfer -----------------------------
 EXTENDS Naturals, TLC
 (* 
@@ -67,7 +67,7 @@ end algorithm
 
 ## 转账 v1.1
 
-```
+```tla
 EXTENDS Naturals, TLC
 (*
 --algorithm transfer
@@ -99,7 +99,7 @@ MoneyNotNegative == money >= 0
 
 为了避免此类问题，在代码中加入对资金总额的检验，要求在转账前后资金总额保持不变。定义变量 `account_total`和恒定量 `MoneyInvariant == alice_account + bob_account = account_total`
 
-```
+```tla
 EXTENDS Naturals, TLC
 (* 
 --algorithm transfer
@@ -139,7 +139,7 @@ MoneyInvariant == alice_account + bob_account = account_total
 
 *TLC* 报错，错误信息是违反了恒定量 MoneyInvariant。
 具体是指，当执行到 B 步骤时，`alice_account = 9，bob_account = 10`，而初始时的资金总额 
-```
+```tla
 account_total = 20
 alice_account + bob_account = 19
 ```
@@ -152,7 +152,7 @@ alice_account + bob_account = 19
 在 *PlusCal* 中定义事务，是将步骤前的标签统一。
 
 因此，对 v1.2 代码加入事务，得到以下 v2.0 代码：
-```
+```PlusCal
 (* --algorithm transfer
 variables alice_account = 10, bob_account = 10, money \in 1..20;
           account_total = alice_account + bob_account;
@@ -169,12 +169,10 @@ end algorithm *)
 
 <br />
 
-<br />
-
 # 并发 v1.0
 以上的转账操作，都是在单个线程下发生的。在实际操作中，还可能遇到多线程的情况，那么如何用 *TLA+* 去实现并校验多线程下程序的准确性呢？
 
-```
+```PlusCal
 (* --algorithm transfer
 variables alice_account = 10, bob_account = 10;
           account_total = alice_account + bob_account;
