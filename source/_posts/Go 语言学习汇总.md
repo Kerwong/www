@@ -59,6 +59,8 @@ func main() {
 
 <br />
 
+
+
 ## 基本知识
 
 ### 基本类型
@@ -78,6 +80,8 @@ Go 语言的基本类型同其他语言类似，有如下几种：
 | string                          | 字符串       |                              |
 
 <br/>
+
+
 
 #### 数组 []
 
@@ -107,6 +111,8 @@ arr7 := [4][2]int{{1, 2}, {3, 4}, {5, 6}, {7, 8}}
 ```
 
 <br/>
+
+
 
 #### 切片 slice
 
@@ -142,6 +148,8 @@ slice8 := slice[2:3:4] // 长度为 3 - 2 = 1， 容量为 4 - 2 = 2
 
 <br/>
 
+
+
 #### 映射 map
 
 映射是用于存储键值对的无序集合。
@@ -167,6 +175,8 @@ if exists {
 
 <br/>
 
+
+
 #### 指针和引用
 
 Go 与 C++ 类似，用到了指针和引用。
@@ -188,6 +198,8 @@ rect := [4] *[2]Point{&line, &line, &line, &line}
 
 <br/>
 
+
+
 #### 枚举 itoa
 
 Go 语言本身没有提供枚举类型的关键字，但可以通过 `const + iota` 实现，如下
@@ -207,6 +219,8 @@ week := Monday	// 使用
 ```
 
 <br/>
+
+
 
 ### 分支判断
 
@@ -249,6 +263,8 @@ default:
 
 <br/>
 
+
+
 ### 循环
 
 Go 的循环通过 `for` 实现，也可以通过 `range` 关键字，实现 `for-each` 的效果
@@ -274,16 +290,8 @@ Go 不支持 `while` 关键字
 
 <br/>
 
-### 包/权限管理
 
-1. 包导入优先查找 Go 的安装目录，然后才按顺序查找 GOPATH 变量列出的目录
-2. 标识符（包括函数，变量的标识符）的首字母的大小写控制是否从包中公开。**首字母大写，公开；小写，不公开**。
 
-```
-
-```
-
-<br/>
 
 ### 函数
 
@@ -330,6 +338,8 @@ fun2
 
 <br/>
 
+
+
 #### 函数出入参/匿名函数/闭包/
 
 以函数为入参
@@ -367,6 +377,40 @@ ff(40, 50, "foobar")	// 返回 2000
 
 <br/>
 
+
+
+### 包/权限管理
+
+1. 包导入优先查找 Go 的安装目录，然后才按顺序查找 GOPATH 变量列出的目录
+
+2. 标识符（包括函数，变量的标识符）的首字母的大小写控制是否对包外公开。**首字母大写，公开；小写，不公开**。
+
+3. 短变量声明操作符 `:=` 有能力捕获引用的类型，可以创建一个未公开的类；但永远不能显示创建未公开的类
+
+   ```go
+   // --- package a ---
+   type stu struct {
+     name string
+     age int
+   }
+
+   func NewStu() stu {
+     return stu{name: "a", age: 20}
+   }
+
+   // --- package main ---
+   func main() {
+     v := a.NewStu()	// OK，v 的类型是 stu，虽然 stu 对包外不可见
+     fmt.Println(v)
+   }
+   ```
+
+4. 未公开的嵌入类型，若其声明标识符是公开的，则会向上暴露，外部类型可以直接访问这些公开标识符。嵌入类型会在下文介绍。
+
+<br/>
+
+
+
 ### 一些困惑
 
 1. `make` 和 `new` 新建变量
@@ -398,231 +442,408 @@ ff(40, 50, "foobar")	// 返回 2000
 
 <br/>
 
+
+
 ## 高级应用
 
-## 接口 interface/多态
+### 接口 interface/多态
 
-Go 本身并不是一门 OO 的语言，但还是支持了部分 OO 的理念，例如多态。如果了解 C++ 的虚表和 Java 的 OO 概念，对 Go 的多态理解会有所帮助，但 Go 的多态和 C++、Java 有所区别的。最主要的一点区别就是数据和方法的分离。
+Go 本身并不是一门 OO 的语言，但还是支持了部分 OO 的理念，例如多态。
 
-如果用户定义的类型实现了某个接口 `interface` 类型声明的一组方法，那么用户定义的类型的值就可以赋值给这个接口，这个过程本身是多态的。
+在 Go 语言中，对数据和方法进行了分离。在 `struct` 中定义数据类型和结构，在 `interface` 中定义方法的签名。
 
-> Go中的任何对象都可以表示为 `interface{}`
+接口值是一个两个字长度的数据结构，一个字是包含一个指向内部表的指针，另一个是指向所存储值的指针。
+
+如果用户定义的类型实现了某个接口 `interface` 类型声明的一组方法，那么用户定义的类型的值就可以赋值给这个接口，这个过程就是多态的。
+
+> Go中的任何对象都可以表示为 `interface{}`, 其地位有点类似 Java 的 Object
+
+如下所示，代码定义了 `type user struct` 和 `type manager interface`。 然后在 11 - 17 行中为 `user` 实现了接口 `manager` 的方法。在使用时，`interface` 可以接受实现了其所有方法的 `struct` 的指针。此时可以将该 `struct` 视为一个类的实例，该实例拥有了 `struct` 的数据，并实现了 `interface` 的方法。
+
+如下第 32-41 行，都是先创建了 `struct` 的数据，然后将引用赋值给 `interface`。
 
 ```go
-//----------------- 包 test ----------------------
-// 定义的类型
-type User struct {
-	Name string
-	Age  int
+type user struct {
+	name string
+	age  int
 }
 
-// 定义的接口
-type Describe interface {
-	GetName() string	// 对包外可见
-	getAge() int	// 对包外不可见
+type manager interface {
+	getName() string
+	setAge(int)
 }
 
-// 接收者类型为指针的实现
-func (u *User) getAge() int {
-	return u.Age
-}
-func (u *User) GetName() string {
-	return u.Name
+func (u *user) setAge(age int) {
+	u.age = age
 }
 
-//----------------- 包 main ----------------------
-func test1(d test.Describe) {
-	fmt.Println(d.GetName())
-	//fmt.Println(d.getAge()) 调用不了 getAge
+func (u *user) getName() string {
+	return u.name
 }
 
-func main() {
-	u := test.User{"Alice", 30}
-	test1(&u)
+// 传入接口
+func test(m manager) {
+	m.getName()
+	m.setAge(10)
+}
+
+// 传入结构
+func test2(u user) {
+	u.getName()
+	u.setAge(20)
+}
+
+func TestMain(t *testing.T) {
+	var a manager = &user{"a", 10}
+	a.setAge(20)
+	// test2(&a)	// Error, 因为 a 是 manager
+  
+	b := user{"b", 1}
+	test(&b)
+	test2(b) // 注意，不能是引用
+  
+    var c = user{"c", 3}	// 变量未定义为接口，但也可调用 user 实现的方法。
+	c.setAge(20)
 }
 ```
 
+注意到 `func` 后声明的是 `(u *user)` ，这是指针接收器（pointer receiver），还有一种类型是 `(u user)` （values receiver）。这两者的区别在于:
 
+1. ```go
+   var v I = T{}  //对应 func(this T) test {}
+   var v I = &T{} //对应 func(this *T) test {} 或 func(this T) test {}
+   ```
 
-## 并发
-
-### goroutine
-
-goroutine 是一个独立于其他函数运行的函数，与线程有所区别，一个线程可运行多个 goroutine
-
-go func() {} (matcher, feed)
-
-### channel
-
-
-
-# 深入 Go 语言
-
-## 内存模型
-
-
-
-### 垃圾回收
-
-
-
-## 网络问题
-
-
-
-
-
+2. **声明为`(this *T)` 即 pointer receiver 才可以修改 v 的值，声明为`(this T)` 即 value receiver 操作的是 v 的值拷贝，不会对 v 造成修改**
 
 
 <br/>
 
-# 附录
 
-## Go 的单元测试
 
-Go 下有几种单测方法：
+### 嵌入类型
 
-1. 基础测试 basic test，只使用一组参数和结果来测试一段代码
-2. 表组测试 table test，多组参数和结果测试一段代码
-3. 模仿 mock，模拟网络和数据库环境，进行测试
+Go 支持将已有的 struct 直接嵌套入新的结构中，称之为嵌入类型。
 
-### 基础测试
+通过嵌入类型，**内部结构的相关方法和变量等将提升至外部，作为外部类型的方法。也就是说，若内部类型实现了对某接口的实现，则外部类型也等于实现了该接口。**
 
-Go 语言下的单元测试，严格准守这 **“约定大于配置”** 的规则，必须遵守约定，测试工具才会将其视为单元测试进行执行。
-
-1. 文件名必须以 `_test.go` 结尾
-2. 必须 `import "testing"`
-3. 测试用例函数必须以 `Test` 作为开头
-4. 测试用例函数入参必须为 `t *testing.T` ，并且无返回
+外部类型可以声明与内部标识符相同的标识符，实现对内部的覆盖。
 
 ```go
-import "testing"
-
-func TestHello(t *testing.T) {
-	fmt.Println("Hello")
-	t.Log("12")
+type student struct {
+	class int
+	grade int
 }
-```
 
-> `t.Log` 系列为测试正常输出，若仅有 `t.Log` 输出，则表示测试通过
->
-> `t.Error` 系列不会终止测试函数运行，但会在结果中显示为测试函数执行错误
->
-> `t.Fatal` 系列会终止当前测试函数运行，进入下一个测试函数
+type EmbedPeople struct {
+	student		// 嵌入类型，无变量名
+	name string
+}
 
-<br/>
+type NonEmbedPeople struct {
+	stu student
+	name string
+}
 
-#### 表组测试
+func (this *student) printSelf() {
+	fmt.Println(this.class)
+	fmt.Println(this.grade)
+}
 
-表组测试就用用一个切片存储一组输入参数，并通过迭代执行该切片所有输入。
-
-以下代码摘自 《Go 语言圣经》，http://gopl-zh.b0.upaiyun.com/ch11/ch11-02.html
-
-```go
-import (
-	"testing"
-)
-
-const checkMark = "\u2713"
-const ballotX = "\u2717"
-
-func TestEcho(t *testing.T) {
-	var tests = []struct {
-		newline bool
-		sep     string
-		args    []string
-		want    string
-	}{
-		{true, "", []string{}, "\n"},
-		{false, "", []string{}, ""},
-		{true, "\t", []string{"one", "two", "three"}, "one\ttwo\tthree\n"},
-		{true, ",", []string{"a", "b", "c"}, "a,b,c\n"},
-		{false, ":", []string{"1", "2", "3"}, "1:2:3"},
+func TestMain(t *testing.T) {
+	p := EmbedPeople{
+		student: student{	// 采用嵌入类型默认名称
+			class: 1,
+			grade: 2,
+		},
+		name: "a",
 	}
+	p.printSelf()	// 嵌入类型，可直接使用
+	p.student.printSelf()
+  
+    p1 := NonEmbedPeople{
+		stu: student{
+			class: 3,
+			grade: 4,
+		},
+		name: "b",
+	}
+	// p1.printSelf()	invalid, 'case stu not an embed
+	p1.stu.printSelf()
+}
+```
 
-	t.Log("Start")
-	{
-		for _, test := range tests {
-			t.Logf("echo(%v, %q, %q)", test.newline, test.sep, test.args)
-			{
-				out = new(bytes.Buffer) // captured output
-				if err := echo(test.newline, test.sep, test.args); err != nil {
-					t.Errorf("%s failed: %v", ballotX, err)
-					continue
-				}
-				got := out.(*bytes.Buffer).String()
-				if got != test.want {
-					t.Errorf("%s = %q, want %q", ballotX, got, test.want)
-				}
-			}
+<br/>
+
+
+
+
+### 并发
+
+#### goroutine
+
+并发编程非常重要，Go 语言以其对并发而闻名，其中最重要的机制便是 `goroutine`。
+
+- Go 语言将每个 goroutine 视为独立的工作单元
+- goroutine 相当于一个 Go 进程下的轻量级线程，被称为**协程**，调度由 Go 语言的逻辑处理器而非 OS 管理。
+- goroutine 同步由`通信顺序进程（Communicating Sequential Process，CSP）`实现。CSP 是一种消息传递模型，而不是对数据加锁实现同步
+- goroutine 维护一个队列，分配时间片给每个 goroutine。若阻塞时，将暂时从队列移出
+- Go 语言默认使用机器 CPU 核数的逻辑处理器数
+- Go 默认最多支持 1万个 goroutine，可通过参数 `SetMaxThreads` 修改。
+
+```go
+func TestGo(t *testing.T) {
+	runtime.GOMAXPROCS(1)	// 设置最大逻辑处理器，此处设为 1
+
+	var wg sync.WaitGroup	// 声明等候计数，此处设为 2
+	wg.Add(2)	// 等候计数需要与以下的 goroutine 数相等，若太少，会有 goroutine 不会执行，若太多则会报 fatal error: all goroutines are asleep - deadlock!
+
+	fmt.Println("Start Goroutines")
+
+  	// 以下是 goroutine 的标准用法
+	go func() {
+		defer wg.Done()	// 当 goroutine 结束时，释放计数
+		for count := 0; count < 100; count++ {
+			fmt.Printf("A: %d\n", count)
 		}
-	}
+	}()
+
+	go func() {
+		defer wg.Done()
+		for count := 0; count < 100; count++ {
+			fmt.Printf("B: %d\n", count)
+		}
+	}()
+
+	fmt.Println("Waiting for finish")
+	wg.Wait()	// 等候计数全部释放
+
+	fmt.Println("Gorountine End")
 }
 ```
 
-### 基准测试
+<br/>
 
-基准测试是测试性能的方法，可以识别某段代码的 CPU 或内存效率，或者辅助配置工作池数量，以提高吞吐。
+#### 原子操作与互斥锁
 
-基准测试与单元测试在使用上大同小异。
+锁是保证在并发时，数据同步的重要方式，类似于 Java，Go 提供了 `atomic` 原子操作包和 `sync` 互斥锁。
 
-1. 文件名必须以 `_test.go` 结尾
-2. 必须 `import "testing"`
-3. 测试用例函数必须以 `Benchmark` 作为开头
-4. 测试用例函数入参必须为 `t *testing.B` ，并且无返回
-
+`atomic` 包下提供了 `AddXXX`, `LoadXXX`, `CompareAndSwapXXX`, `StoreXXX`, `SwapXXX`. 由名字就可知道作用，其中 `XXX` 代表基本数据类型。如下例，虽然 `Load` 和 `Add` 是分为两步，但每一步都是原子操作，因此最终结果无误
 
 ```go
 package test
 
 import (
 	"testing"
+	"runtime"
+	"sync"
+	"fmt"
+	"sync/atomic"
+	"time"
+)
+
+var wg sync.WaitGroup
+var count int32		// 需共享的数据
+
+func TestGo(t *testing.T) {
+	runtime.GOMAXPROCS(1)
+	wg.Add(2)
+	fmt.Println("Start Goroutines")
+
+	go addCounter("A")
+	go addCounter("B")
+
+	fmt.Println("Waiting for finish")
+	wg.Wait()
+	fmt.Println("Gorountine End")
+}
+
+
+func addCounter(name string) {
+	defer wg.Done()
+
+	for i := 0; i < 5; i++ {
+		fmt.Printf("%s: old = %d\n", name, atomic.LoadInt32(&count))
+		time.Sleep(100000)
+		fmt.Printf("%s: new = %d\n", name, atomic.AddInt32(&count, 1))
+		runtime.Gosched()	// 当前 goroutine 从线程退出，并放回到队列
+	}
+}
+```
+
+输出
+
+```
+Start Goroutines
+Waiting for finish
+B: old = 0
+A: old = 0
+A: new = 1
+B: new = 2
+A: old = 2
+B: old = 2
+... ...
+A: old = 8
+A: new = 9
+B: new = 10
+Gorountine End
+```
+
+当然 Go 也可以用互斥锁实现上述代码，只需要将 `addCounter` 少做改动
+
+```go
+var lock sync.Mutex	// 新增锁的声明
+
+func addCounter(name string) {
+	defer wg.Done()
+
+	for i := 0; i < 5; i++ {
+		lock.Lock()	// 上锁
+		{
+			count++
+			runtime.Gosched()	// 从当前 goroutine 退出并放回队列
+			fmt.Printf("%s: %d\n", name, count)
+		}
+		lock.Unlock()	// 释放锁
+		time.Sleep(time.Duration(rand.Int63n(1000)))
+	}
+}
+```
+
+
+
+另一个互斥锁的例子，摘自 [Go 指南](https://tour.go-zh.org/concurrency/9) ， 对某一结构加入锁声明，可以实现对该结构的原子操作
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// SafeCounter 的并发使用是安全的。
+type SafeCounter struct {
+	v   map[string]int
+	mux sync.Mutex
+}
+
+// Inc 增加给定 key 的计数器的值。
+func (c *SafeCounter) Inc(key string) {
+	c.mux.Lock()
+	// Lock 之后同一时刻只有一个 goroutine 能访问 c.v
+	c.v[key]++
+	c.mux.Unlock()
+}
+
+// Value 返回给定 key 的计数器的当前值。
+func (c *SafeCounter) Value(key string) int {
+	c.mux.Lock()
+	// Lock 之后同一时刻只有一个 goroutine 能访问 c.v
+	defer c.mux.Unlock()
+	return c.v[key]
+}
+
+func main() {
+	c := SafeCounter{v: make(map[string]int)}
+	for i := 0; i < 1000; i++ {
+		go c.Inc("somekey")
+	}
+
+	time.Sleep(time.Second)
+	fmt.Println(c.Value("somekey"))
+}
+```
+
+
+
+`sync` 包下还提供了**读写锁 `RWMutex`**。读写锁是为了满足写不频繁但读比较频繁的资源的并发请求，读时不互斥，一旦有写入操作，才会上锁互斥。此处不再赘述，可以直接看 Go 的包源码。
+
+<br/>
+
+
+
+#### 通道 channel
+
+锁自然可以实现并发操作的安全访问，但 Go 还提供了更强大的通道 `channel`, 通道的含义是，在两个 goroutine 之间搭建了一个通道，使得两个 goroutine 可以实现数据共享。
+
+- 通道可以共享内置类型、命名类型、结构类型和引用的值或指针。
+- 通道分为有缓冲 `buffered channel`和无缓冲通道`unbuffered channel`，无缓冲通道需发送和接收放 goroutine 都处于准备状态，不然将阻塞，有缓冲通道若缓冲超出容量，也将阻塞。
+- 无缓冲通道可以保证同时交换数据
+
+以下是有缓冲通道示例，摘自 《Go 语言实战》
+
+```go
+package test
+
+import (
+	"testing"
+	"fmt"
+	"sync"
 	"strconv"
 )
 
-func BenchmarkFormat(b *testing.B) {
-	number := int64(10)
+type Message string
 
-	b.ResetTimer()
-	b.N = 5001
+var (
+	num = 4	// goroutine 数量
+	wg sync.WaitGroup
+)
 
-	for i := 0; i < b.N; i++ {
-		strconv.FormatInt(number, 10)
+func TestChannel(t *testing.T) {
+	wg.Add(num)
+
+	c := make(chan Message, 2)	// 创建一个缓冲为 2 的通道
+
+	for i := 0; i < num; i++ {
+		go deal("No. "+strconv.Itoa(i), c)	// 循环创建 4 个 goroutine
 	}
+
+	for i := 0; i < 100; i++ {
+		c <- Message("Task " + strconv.Itoa(i))	// 循环发起 100 笔工作，交由 4 个 goroutine 处理
+	}
+
+	close(c)	// 处理完所有工作时，关闭通道
+	wg.Wait()	// 等待所有 goroutine 结束
 }
 
-func BenchmarkItoa(b *testing.B) {
-	number := 10
-
-	b.ResetTimer()
-	b.N = 5002
-
-	for i := 0; i < b.N; i++ {
-		strconv.Itoa(number)
+func deal(name string, c chan Message) {
+	defer wg.Done()
+	for {
+      	// 
+		if msg, ok := <-c; ok {
+          	 // 从通道取出工作，并完成
+			fmt.Printf("I'm %s, do %s\n", name, msg)
+		} else {
+          	 // 意味着通道已清空，并被关闭
+			fmt.Printf("I'm %s, Dead\n", name)
+			return
+		}
 	}
 }
 ```
 
-输出，单位 ns/op 表示每条指令消耗的纳秒数，B/op 表示每条指令消耗的内存
-
-```
-5001	        33.8 ns/op	       2 B/op	       1 allocs/op
-5001	        40.0 ns/op	       2 B/op	       1 allocs/op
-5002	        44.0 ns/op	       2 B/op	       1 allocs/op
-5002	        40.4 ns/op	       2 B/op	       1 allocs/op
-PASS
-```
-
-> 配置参数 -test.benchtime 5s -test.benchmem -test.count 2 -test.parallel 4 -test.timeout 120s
+> 在通道数据写入完毕后，需 close，否则 goroutine 永远 ok，永远不会执行到 return，会报 fatal error: all goroutines are asleep - deadlock!
 
 
 
-- -test.benchtime 5s 测试至少跑 5s
-- -test.benchmem 显示内存消耗
-- -test.count 2 每个测试函数跑两遍
-- -test.parallel 4 并发
-- -test.timeout 120s 若超过 120s 则退出
+# TBD
 
+- 内存模型
+
+- 垃圾回收
+- 网络问题
+- 机器底层实现机制 Mechanical Sympathy
+- 面向数据的设计 Data Oriented Design
+- 值和指针的语义 Value/Pointer Semantics
+- 去耦/组合 Decoupling/Composition
+- 错误处理 Error Handling
+- 并发深入研究
+
+
+
+这些主题，将于后期工作中逐步完善，2018年05月06日16:59:20
 
 <br/>
 
@@ -636,3 +857,5 @@ PASS
 [3] 极客学院，http://wiki.jikexueyuan.com/project/the-way-to-go/
 [4] http://blog.csdn.net/u013790019/article/details/45397287
 [5] 《Go 语言圣经》，http://gopl-zh.b0.upaiyun.com/ch11/ch11-02.html
+[6] https://golang.org/doc/effective_go.htmlhttps://golang.org/doc/effective_go.html
+[7] 《Go 语言实战》
