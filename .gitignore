@@ -5,3 +5,4 @@ db.json
 public/
 .deploy*/
 package*.json
+source/_posts/.vscode/settings.json
