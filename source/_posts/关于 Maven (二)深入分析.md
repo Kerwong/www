@@ -40,7 +40,9 @@ Maven  项目一般采用标准的工程目录，所有文件也应该按照约�
 以上为一般项目必须的以外，目录视具体项目而定，并非必有。
 
 <br/>
+
 # Maven 生命周期
+
 Maven  是一个构建工具，在 Maven  出现之前，构建便一直存在。但 Maven  的出现，将项目构建抽象成了一个标准的模型（即项目的生命周期），通过 Maven  生命周期的管理，项目的清理、初始化、编译、测试、打包、部署都容易了很多。
 
 Maven  的生命周期分为 clean （清理项目），default （构建），site （建立项目站点）三个独立部分。
@@ -88,7 +90,9 @@ Maven 生命周期：
 在执行 Maven  命令时，如 mvn test , 则在 default  阶段，test  之前的所有操作都将被执行，即上表中从 validate  至 test  之间所有的命令都将被执行。而非 default  段的命令，包括 clean  和 site  段，由于与 default  段是相互独立的，所以不被执行。
 
 <br/>
+
 # Maven 的坐标与依赖
+
 在 POM  文件中，通过 Maven  的坐标来确定一个包。
 例如以下为描述一个依赖的完整形态：
 ```XML
@@ -117,14 +121,14 @@ Maven 生命周期：
 - type （与 packaging  相对）: 依赖的类型，默认为 jar
 - scope : 依赖的范围，依赖范围用来控制依赖与三种 classpath  （编译 classpath ，测试 classpath ，运行 classpath ）的关系，依赖范围有
 
-| Scope | CLASSPATH 编译 | CLASSPATH 测试 | CLASSPATH 运行 | 例子 |
-| ----------- | ---- | ---- | ---------------------------------------- | ----------- |
-| compile（默认） | Y    | Y    | Y                                        | spring-core |
-| test        |      | Y    |                                          | JUnit       |
-| provided    | Y    | Y    |                                          | Servlet-api |
-| runtime     |      | Y    | Y                                        | JDBC驱动      |
-| system（慎用）  | Y    | Y    | 本地绑定，Maven 仓库外的类库文件，使用 system 范围的依赖时必须通过 systemPath 元素显式指定依赖文件的路径 |             |
-| import      |      |      |                                          |             |  |
+| Scope       | CLASSPATH 编译 | CLASSPATH 测试 | CLASSPATH 运行                             | 例子          |
+| ----------- | ------------ | ------------ | ---------------------------------------- | ----------- |
+| compile（默认） | Y            | Y            | Y                                        | spring-core |
+| test        |              | Y            |                                          | JUnit       |
+| provided    | Y            | Y            |                                          | Servlet-api |
+| runtime     |              | Y            | Y                                        | JDBC驱动      |
+| system（慎用）  | Y            | Y            | 本地绑定，Maven 仓库外的类库文件，使用 system 范围的依赖时必须通过 systemPath 元素显式指定依赖文件的路径 |             |
+| import      |              |              |                                          |             |
 
 - classifier （插件生成，不可定义）: 该元素用来帮助定义构建输出一些附属构件。附属构件指文档或源代码等，通过插件帮助生成。
 - optional : 可选依赖，如创建的项目为 A，为在 A 项目的 POM.xml  文件中指明了可选依赖于 B 包，那么依赖于 A 的项目将不会依赖于 C。根据单一职责性原则，应尽可能不出现 optional  标签。
@@ -134,7 +138,9 @@ Maven 生命周期：
 以上 groupId ，artifactId ，version 三项为必填项。
 
 <br/>
+
 # Maven 的仓库
+
 一般而言，DEV  可以直接选用中央仓库来为项目提供包的支持，但也可以在组织内部搭建私有的中央库，这么做的目的一是访问中央库需要外部网络，二是需要管理发布一些组织内部私有的包。
 由于大多数 DEV  并不会也没必要去管理一个私有的库，因此，待之后有需求时再学习下私有库的搭建了。
 ![](http://nutslog.qiniudn.com/17-5-17/51634541-file_1495026996531_18271.png)
@@ -158,5 +164,6 @@ Maven 生命周期：
 以上对 Maven  进入了深入的介绍，在这篇里多次提到了 pom.xml  这个 Maven  项目最重要的文件，那么也该看看这个的全貌了。
 
 <br/><br/>
+
 # 参考资料
 - 《Maven 实战》（第1版），许晓斌著

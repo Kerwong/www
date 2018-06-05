@@ -234,7 +234,7 @@ List<String> names = menu.stream()              //←─从菜单获得流
 | reduce                      | 终端（有状态-有界） | Optional<T> | BinaryOperator<T>      | (T, T) -> T    | 归约，例如将元素合并                               |
 | count                       | 终端         | long        |                        |                | 计数，返回流中元素个数                              |
 
-
+<br/>
 
 **流操作的无状态和有状态：**
 
@@ -303,7 +303,7 @@ Optional<T> reduce(BinaryOperator<T> accumulator);
 
 <br/>
 
-## 其他
+## 其他相关操作
 
 ### 数值流
 
@@ -353,7 +353,7 @@ Optional<T> reduce(BinaryOperator<T> accumulator);
 
    `Files.lines` 方法返回文件的每一行字符串。
 
-5. 函数生成流
+5. **函数生成流**
 
    由数值流的 `range` 或 `rangeClosed` 方法生成数值流
 
@@ -452,7 +452,7 @@ Java 8 提供了 Collectors 静态工厂方法，返回 `Collector<T, A, R>`，�
 | minBy                          | `T`                  | 按比较器规则，返回流中最小元素，由 Optional 包裹            |
 | reducing                       |                      | 从一个初始值开始，利用 BinaryOperator 与流中元素逐个结合，将流归约为一个值 |
 
-
+<br/>
 
 #### 收集 collect 与归约 reduce 的区别
 
@@ -480,6 +480,8 @@ nums.stream().reduce(new ArrayList<>(),
 1. 语义不同，`reduce` 语义旨在将两个值结合，生成一个新值，是不可变的归约，`collect` 的设计是改变容器，累计输出的结果。
 2. 并行化，在前文提到过，`reduce`  的方法应该满足结合律 associative，互不干扰的 non-interfering，无状态 stateless 的要求，而上例中的 `List` 在并行时，被多个线程修改，是非线程安全的，同时线程对象的分配会影响性能。
 
+
+<br/>
 
 
 ### 分组
@@ -530,7 +532,7 @@ Map<Integer, Map<ValueLevel, Optional<Transaction>>> groupMultiTransactionAndThe
 }
 ```
 
-
+<br/>
 
 ### 分区
 
@@ -544,7 +546,7 @@ Map<Boolean, Map<ValueLevel, List<Transaction>>> partitionTransaction(List<Trans
 }
 ```
 
-
+<br/>
 
 ## 自定义收集器 Collector
 
@@ -689,5 +691,4 @@ public class PrimeMain {
 
 # 参考资料
 
-[1] *《Java 8 in Action（Lambdas, streams, and functional-style programming）》*Raoul-Gabriel Urma, Mario Fusco, Alan Mycroft 著，陆明刚，劳佳译，人民邮电出版社 2016 年 4月第 1版
-
+[1] 《Java 8 in Action（Lambdas, streams, and functional-style programming）》 Raoul-Gabriel Urma, Mario Fusco, Alan Mycroft 著，陆明刚，劳佳译，人民邮电出版社 2016 年 4月第 1版

@@ -47,12 +47,6 @@ Blockchain Explorer 和 Cello 对我们也会有些借鉴作用，留作日后�
 
 
 
-
-
-
-
-
-
 ## Peers
 
 Fabric 中 `Peer` 是网络中最基础的部分，是用于管理 `账本 ledger` 和`智能合约 smart contract 或称为 chaincode` 实例。
@@ -65,7 +59,7 @@ Peer 可被创建、启动、停止、配置、删除。Peer 对外暴露 API，
 
 > 一个 Peer 允许保留多个 ledger 和多个 chaincode。同一 chaincode 也可以访问不同 ledger
 
-
+<br/>
 
 ### Channel & Org
 
@@ -114,6 +108,8 @@ Fabric 网络中提供 orderer 节点，orderer 的功能是对提案进行入�
 
 ![](http://nutslog.qiniudn.com/18-3-29/61605614.jpg)
 
+<br/>
+
 #### Phase 2：打包
 
 1. APP 将通过背书的提案发送至 Orderer 节点，多个APP 会并行向 Orderer 节点发送提案
@@ -121,6 +117,8 @@ Fabric 网络中提供 orderer 节点，orderer 的功能是对提案进行入�
 3. 出块后，Orderer 将块发往 channel
 
 ![](http://nutslog.qiniudn.com/18-3-29/94444880.jpg)
+
+<br/>
 
 #### Phase 3：验证
 
@@ -136,6 +134,8 @@ Fabric 网络中提供 orderer 节点，orderer 的功能是对提案进行入�
 
 ![](http://nutslog.qiniudn.com/18-3-29/47077633.jpg)
 
+<br/>
+
 ## 账本 Ledger
 
 区块链的账本，是一个有序的，不可被篡改的状态数据，状态的变化的汇总形成了最终的数据。
@@ -143,7 +143,7 @@ Fabric 网络中提供 orderer 节点，orderer 的功能是对提案进行入�
 因此 ledger 包含了两部分
 
 - 用来保存当前值的`world state` ，KV 对形式存在，可增删改查。
--  `blockchain`，交易日志，记录所有交易变化。不可改，有序
+- `blockchain`，交易日志，记录所有交易变化。不可改，有序
 
 
 
@@ -219,7 +219,7 @@ Certificate:
 
 显然，区块链内部颁发的证书是私有的，是无法被浏览器等认可的。
 
-
+<br/>
 
 证书可以颁发，自然也应允许被废除，废除的证书被维护在一个 Certificate Revocation List (CRL) 列表中。CRL 是 PKI 一部分，当校验证书时，会先查询 CRL 列表。
 
@@ -292,7 +292,7 @@ msp
     `-- tlsintermediate.pem
 ```
 
-
+<br/>
 
 # 术语
 
@@ -304,9 +304,8 @@ msp
 | Concurrency Control Version Check |       | 用于交易执行和提交时的事务控制，用于保证不出现脏读                |
 | Configuration Block               | 配置块   | 记录排序服务或通道的机构和策略。所有如机构的新增和退出，都会为配置链新增配置块，链的配置为 genesis block + delta |
 | Dynamic Membership                | 动态会员  |                                          |
-|                                   |       |                                          |
 
-
+<br/><br/>
 
 # 参考资料
 

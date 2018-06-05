@@ -28,6 +28,7 @@ int[] arr;    // 首选
 int arr[];
 ```
 <br/>
+
 ### 一维数组
 ```Java
 int[] arr1 = {1,2,3,4,5,6,7,8,9,0};
@@ -37,6 +38,7 @@ int[] arr2 = new int[11];    // int[11] 这里的 11 必填，用于设置数组
 
 其他类型，包括所有基本类型、各种类都能作为数组指定的类型，但不包括泛型。
 <br/>
+
 ### 多维数组
 多维数组的声明和初始化与一维类似，写法略有不同。
 ```Java
@@ -64,6 +66,7 @@ arr2 = new char[1][2][];
 // arr2 = new char[1][][3]; # illegal
 ```
 <br/>
+
 #### 粗糙数组
 因为数组标识符只是一个引用，因此，在多维数组中，第二维及以上维度，长度可以不相等。例如
 ```java
@@ -90,6 +93,7 @@ Double[][][] arr2 = {
 // Print: [[[1.0, 1.2, 1.4], [2.0, 2.2, 2.4, 2.6], [3.1]], [], [[-1.0, -2.1, -3.2]]]
 ```
 <br/>
+
 ### 复杂类型数组
 数组可以存储复杂的类，例如 `Shape[] shapes = {new Circle(), new Triangle()};`
 但数组与泛型结合并不好，不能实例化具有参数化类型的数组，例如
@@ -122,6 +126,7 @@ class MethodParam {
 
 注意，使用参数化而不使用参数化类的方便之处在于：不必为需要应用的每种不同类型都使用一个参数去实例化这个类，并且，可以将其定义为静态的。
 <br/>
+
 ## 访问与处理
 ```java
 int[] arr1 = {1,2,3,4,5,6,7,8,9,0};
@@ -152,6 +157,7 @@ for (Double[][] a1 : arr) {
 }
 ```
 <br/>
+
 # Arrays 类的使用
 ## asList()
 `asList()`, 将数组转为 ArrayList  容器，而不是 LinkedList 。
@@ -174,6 +180,7 @@ List<int[]> listI = Arrays.asList(arrI);  // listI size = 1
 List<Double[][]> listD = Arrays.asList(arrD);  // listD size = 3
 ```
 <br/>
+
 ## binarySearch()
 `binarySearch()` ，二分查找，只支持一维数组。若查到，则返回其下标，若没查到，则返回 -1
 注意，调用 `binarySearch()`  时，需要先执行 `sort()`  操作，否则将会返回一个 undefined  的值。
@@ -194,6 +201,7 @@ r = Arrays.binarySearch(arri, 5);        // r = 5
 r = Arrays.binarySearch(arri, 10);        // r = 9
 ```
 <br/>
+
 ## copyOf()
 `copyOf()`  与 `copyOfRange()` ，将原数组拷贝至新数组，仅支持一维数组。若新数组比拷贝的数组长，填充 0，同样，拷贝时不可数组下标越界。
 ```java
@@ -204,10 +212,12 @@ int[] arr3 = Arrays.copyOfRange(arri, 2, 6);
 // int[] arr4 = Arrays.copyOfRange(arri, 6, 2);    // java.lang.IllegalArgumentException: 6 > 2
 ```
 <br/>
+
 ## equals()
 `equals()` ，比较两个一维数组是否相等，若相等，返回 true ，否则 false
 类似的，有 `deepEquals()` ，该方法针对 `Object[]`
 <br/>
+
 ## fill()
 `fill()` ，将数组内全部填充某一元素，常用于初始化，仅针对一维数组。
 ```java
@@ -215,6 +225,7 @@ int[] arr = new int[10];
 Arrays.fill(arr, 88);
 ```
 <br/>
+
 ## hashCode()
 `hashCode()` , 根据给定的数组，计算其 hash 值 。仅支持一维数组。可以对两个数组分别求 `hashCode()` ，然后比较，若相等，则两个数组一致。
 类似的，还有 `deepHashCode()` ，该方法针对 `Object[]`
@@ -224,11 +235,13 @@ Arrays.fill(arr, 88);
 > —— JDK Arrays.java
 
 <br/>
+
 ## sort()
 `sort()` , 对数组进行排序，默认为递增序。`sort()`  之后，**会改变原数组内元素的顺序！** 返回 void 。
 此外，`sort()` 还允许指定范围，对范围内的元素进行排序。
 
 <br/>
+
 ## toString()
 `toString()` ，将数组转换成用于打印的字符串结构。类似的，还有 `deepToString()` , 针对的是 `Object[]` 。
 

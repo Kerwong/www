@@ -24,6 +24,7 @@ Java 容器类库用途是“保存对象”，其中可以划为两个不同概
 
 ![](http://nutslog.qiniudn.com/17-5-17/63028248-file_1495001438479_156aa.png)
 <br/>
+
 ## List
 像 Array  一样， List  建立了数字索引与对象的关联。List 能自动扩容。
 List 的接口实现有 ArrayList 、LinkedList ，它们都按照顺序保存元素。
@@ -35,6 +36,7 @@ List 的接口实现有 ArrayList 、LinkedList ，它们都按照顺序保存�
 
 ![](http://nutslog.qiniudn.com/17-5-17/57392064-file_1494989548600_1776c.png)
 <br/>
+
 ### 关于容量
 #### 初始容量
 ArrayList  采用的是**数组结构**，JDK  默认的初始容量是 10 
@@ -68,6 +70,7 @@ private static class Node<E> {
 }
 ```
 <br/>
+
 #### 容量的扩展
 对于 ArrayList ，由于底层的数组实现，因此会存在数组容量不够的情况，此时变需要扩展。ArrayList  **一次扩容原容量的 1/2** ，例如原容量为 10，扩展后为 15。JDK  实现如下
 ```Java
@@ -85,6 +88,7 @@ private void grow(int minCapacity) {
 ```
 而 LinkedList  为链表操作，不存在分配的内存容量不足的情况。
 <br/>
+
 ### 关于增删
 在指定位置中插入或删除元素，LinkedList  要比 ArrayList  快很多，这是因为 ArrayList  会有一个数组元素移动的过程。
 ```Java
@@ -118,6 +122,7 @@ public static native void arraycopy(Object src,  int  srcPos, Object dest, int d
 
 `arraycopy()` 是个JNI 函数，它是在JVM 中实现的。其作用是移动index  后所有的元素。而 LinkedList 不需要这一步的操作。因此在指定位置的增删，LinkedList  要比 ArrayList  快很多。
 <br/>
+
 ### 关于查询
 关于这两个容器的随机访问。LinkedList  要比 ArrayList  慢一些。
 究其原因，是因为 ArrayList  可以通过index  直接获得元素（数组实现，归功于被分配了一块连续的内存），而 LinkedList  必须从头开始检索（各个 Node  之间并不处于连续的内存块中）。
@@ -143,10 +148,13 @@ Node<E> node(int index) {
 }
 ```
 <br/>
+
 ### 关于 Vector
 <br/>
+
 ### 关于 Stack
 <br/>
+
 ## Set
 Set  容器用来保存**不重复的元素**，如果试图将相同的对象的多个实例添加到 Set  中，那么将会被阻止。通过对源码的分析，可以看出 Set 集合其实是对 Map  的封装，Map  存储的是键值对，那么我们将值隐藏，不向外界暴露，这样就形成了Set 集合。
 Set  最常用的是测试归属性，即查询某个对象是否存在 Set  中，因此查找是 Set  中最重要的操作。
@@ -158,6 +166,7 @@ Set  具有与 Collection  完全一样的接口。Set  是基于对象的值来
 
 ![](http://nutslog.qiniudn.com/17-5-17/76653471-file_1494990801304_17fe0.png)
 <br/>
+
 ### 关于容量/数据结构
 HashSet  底层通过 HashMap  实现 `private transient HashMap<E,Object> map;`。
 在初始化时，默认大小为初始化时元素大小除以 3/4 的大小与 16 之间的较大者（与 HashMap  初始一致）。
@@ -235,6 +244,7 @@ public TreeSet() {
 
 关于 TreeMap  的初始化大小以及扩展，详情参照下文 Map  小节。
 <br/>
+
 ### 关于增删
 因为 Set  是对 Map  的封装，在 Set  中增加一个元素，就是在 Map 中增加一个 <K,V>  键值对，其中 Key  为插入 Set 的值，Value  固定为 PRESENT = new Object() ，PRESENT  为 static 。
 ```Java
@@ -246,6 +256,7 @@ public boolean remove(Object o) {
 }
 ```
 <br/>
+
 ### 关于查询
 同 Map 下的查询
 ```Java
@@ -254,6 +265,7 @@ public boolean contains(Object o) {
 }
 ```
 <br/>
+
 ## Queue
 Queue  队列，是一个典型的**先进先出 FIFO  容器**，即从容器的一端放入事物，从另一端取出，并且放入和取出的顺序是一致的。
 队列常被用作可靠的将对象从程序的某一区域传输到另一区域的途径，在并发编程中特别重要。
@@ -264,10 +276,12 @@ Queue  队列，是一个典型的**先进先出 FIFO  容器**，即从容器�
 
 ![](http://nutslog.qiniudn.com/17-5-17/31468936-file_1495000986510_17260.png)
 <br/>
+
 ### 关于容量
 ### LinkedList
 LinkedList  采用双向链表实现，每次新增元素时，只需修改节点的引用即可将新元素插入，删除同理。因此不存在容量问题。
 <br/>
+
 #### ArrayDeque
 ArrayDeque  采用数组实现，最小容量为 8，默认初始化大小为 16，ArrayDeque  要求其容量始终为 2 的幂次，即 16、32、64 等，由 `allocateElements` 方法实现。
 ```Java
@@ -346,6 +360,7 @@ private void doubleCapacity() {
 }
 ```
 <br/>
+
 #### PriorityQueue
 PriorityQueue  采用**数组结构**，底层采用了平衡二叉树实现堆的算法，来实现对优先级的控制，初始化容量为 11。
 ```Java
@@ -410,10 +425,12 @@ private void grow(int minCapacity) {
 }
 ```
 <br/>
+
 ### 关于增删
 #### LinkedList
 LinkedList  增删见 List 小节。
 <br/>
+
 #### ArrayDeque
 ArrayDeque  的增删，主要难点在于 head、tail 索引的移动。
 通过查看 `addFirst()` , `addLast()`  以及 `removeFirst()` , `removeLast()` 的源代码观察 head、tail 的移动
@@ -494,6 +511,7 @@ public E pollLast() {
 | Stack接口  | peek()        | 同peekFirst()            |
 
 <br/>
+
 #### PriorityQueue
 PriorityQueue  的增删，就是同平衡二叉树（即对堆）的操作，插入一个元素时，从堆尾插入，并不断的 shiftUp，删除一个元素时，就是将堆顶元素删除，然后用左右两个子树上的高优先级的元素替代，然后平衡。
 ```Java
@@ -534,10 +552,12 @@ public E poll() {
 
 ![](http://nutslog.qiniudn.com/17-5-17/492735-file_1495000849424_11ae6.jpg "堆删除")
 <br/>
+
 ### 关于查询
 #### LinkedList
 LinkedList  请看 List  小节
 <br/>
+
 #### ArrayDeque
 ArrayDeque  的查询，如果仅仅是查询队首或队尾的元素，则只需要 O(1)  的时间。
 ArrayDeque 不提供查询某一元素的方法，但是允许删除第一次遇到的某一元素，`removeFirstOccurrence` 和 `removeLastOccurrence` ，分别从队首和队尾开始循环查找，若找到，则删除。时间复杂度为 O(n) 。
@@ -559,6 +579,7 @@ public boolean removeFirstOccurrence(Object o) {
 }
 ```
 <br/>
+
 #### PriorityQueue
 PriorityQueue 下提供了查询方法 `contains()` , PriorityQueue  下的查询也是从数组头开始顺序查找的，时间复杂度为 O(n) ，具体实现如下
 ```java
@@ -572,6 +593,7 @@ private int indexOf(Object o) {
 }
 ```
 <br/>
+
 ## Map
 Map ，即映射表，或关联数组。Map  的基本思想是维护键-值关联（Key-Value，或 KV对） ，JDK  中提供多种 Map  实现，但行为特性、效率、键值对保存顺序、保存周期、多线程操作都不相同。
 
