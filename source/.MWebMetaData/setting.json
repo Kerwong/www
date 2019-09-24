@@ -1,0 +1,10 @@
+{
+  "name" : "我的博客",
+  "fileExtension" : ".md",
+  "autoUploadInsertedImageKey" : "nutslog-https:\/\/upload.qiniup.com",
+  "autoUploadInsertedImage" : false,
+  "folderType" : 10,
+  "mediaFloder" : "media",
+  "orderBy" : 0,
+  "newlinesToBR" : 0
+}

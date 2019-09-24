@@ -42,15 +42,15 @@ tags:
 ## Formal Spec 的生命周期
 通过定义，我们可以发现，*Spec* 在软件生命中，属于偏前期的工作
 
-![](http://nutslog.qiniudn.com/17-11-21/23592304.jpg?imageView2/0/w/440)
+![](http://img.wenchao.wang/17-11-21/23592304.jpg?imageView2/0/w/440)
 
 *Spec* 与 *Design* 的关系
-![](http://nutslog.qiniudn.com/17-11-21/11006871.jpg?imageView2/0/w/440)
+![](http://img.wenchao.wang/17-11-21/11006871.jpg?imageView2/0/w/440)
 
 ## Formal Spec 的成本
 写好一份系统说明书，是要成本的。尤其是引入了一种新的语言，一套全新的思考方式。
 
-![](http://nutslog.qiniudn.com/17-11-21/42609767.jpg?imageView2/0/w/440)
+![](http://img.wenchao.wang/17-11-21/42609767.jpg?imageView2/0/w/440)
 
 使用 *Formal Spec* 后，虽然 Specification 阶段成本增加，但 Design & Implementation 和 Validation 阶段成本显著下降。
 
@@ -92,7 +92,7 @@ tags:
 <br/>
 
 # Hello TLA+
-![](http://nutslog.qiniudn.com/17-11-25/20880664.jpg?imageView2/0/w/300)
+![](http://img.wenchao.wang/17-11-25/20880664.jpg?imageView2/0/w/300)
 
 至此，已经介绍了什么是 *Formal Spec*。但仍然对此没有感性的认识。
 我们要对软件系统进行描述，也知道了如何比较好的描述，但，怎么做？
@@ -123,7 +123,7 @@ tags:
 ## TLA+ 轶事
 *Formal Spec* 作为一个研究分支学科，诞生已经有半个多世纪了，期间诞生过诸多的践行 *Formal Spec* 思想的语言，如 *Z notation、Java Model Language、B-Methods* 等。*TLA+* 相对而言出现的比较晚了。我并没有去深入学习过其他林林总总的*Formal Spec*语言，但一般而言，后来出现或多或少能借鉴前人的经验，规避一些之前设计的不足。
 
-![](http://nutslog.qiniudn.com/17-11-25/73160142.jpg?imageView2/0/w/300 "TLA+ 作者")
+![](http://img.wenchao.wang/17-11-25/73160142.jpg?imageView2/0/w/300 "TLA+ 作者")
 
 *TLA+* 的作者，是分布式领域的大师、大名鼎鼎的图灵奖得主，Leslie Lamport(其个人官网 http://www.lamport.org/
 )。Leslie Lamport 另两个为世人所知的成就是发明了 $LaTeX$ (1985) 和 *Paxos* 算法（1998）解决分布式一致性的问题。
@@ -143,7 +143,7 @@ tags:
 
 此外，还需要了解 *TLA+* 的专属 IDE——*TLA+ Toolbox*。
 
-![](http://nutslog.qiniudn.com/17-11-26/98815720.jpg "Toolbox IDE 截图")
+![](http://img.wenchao.wang/17-11-26/98815720.jpg "Toolbox IDE 截图")
 
 *Toolbox* 是在 *eclipse* 开源框架下编写的 IDE，下载地址在 Lamport 的个人网站 http://lamport.azurewebsites.net/tla/toolbox.html
 
@@ -163,7 +163,7 @@ Divides(p, n) == \E q \in Int : n = p * q
 以上是原始的 *TLA+* 代码，未接触过的话，会觉得编程麻烦，可读性差。在之后会进一步介绍 *PlusCal* 语言，可以方便我们的编程。可读性差，可以通过 *Toolbox* 所提供的 *File->Produce PDF Version* 功能，将 *TLA+* 代码以 $LaTeX$ 的形式翻译为数学表达。
 
 效果如下：
-![](http://nutslog.qiniudn.com/17-11-26/39204452.jpg)
+![](http://img.wenchao.wang/17-11-26/39204452.jpg)
 
 
 #### 代码解释
@@ -183,7 +183,7 @@ Divides(p, n) == \E q \in Int : n = p * q
 #### 用 *TLC* 执行一下
 以上我们已经通过 *TLA+* 定义了一个最为基础的方法，然后就可以通过 *TLC* 验证一下了。在 *Toolbox -> TLC Model Checker -> New Model...* 中新建 *TLC Model*，新增表达式 `Divides(2,4)`，然后执行。
 
-![](http://nutslog.qiniudn.com/17-11-26/25803310.jpg?imageView2/0/w/540)
+![](http://img.wenchao.wang/17-11-26/25803310.jpg?imageView2/0/w/540)
 
 Oops，报错了。
 ```
@@ -204,7 +204,7 @@ SetMax(S) == CHOOSE i \in S : \A j \in S : i >= j
 ```
 等价于
 
-![](http://nutslog.qiniudn.com/17-11-26/38864427.jpg)
+![](http://img.wenchao.wang/17-11-26/38864427.jpg)
 
 其中 `DivisorOf(n)` 表示 $n$ 的所有因子，例如`DivisorsOf(493)` 等价于集合 {1, 17, 29, 493}
 $CHOOSE\quad x \in S:P(x)$ 表示从集合 $S$ 中选取一元素 $x$，使得 $P(x)$ 为 true。例如$Foo \triangleq CHOOSE \quad i \in Int : i^2 = 4$，其中的 $Foo$ 等于 -2 或者 2。
@@ -229,12 +229,12 @@ GCD(m, n) == SetMax(DivisorsOf(m) \cap DivisorsOf(n))
 \* Last modified Sun Nov 26 14:24:28 CST 2017 by wangwc
 ```
 
-![](http://nutslog.qiniudn.com/17-11-26/52355900.jpg)
+![](http://img.wenchao.wang/17-11-26/52355900.jpg)
 
 #### *TLC* 验证
 在 *TLC* 中配置表达式 `GCD(20, 30)`,执行 *TLC*，返回 10
 
-![](http://nutslog.qiniudn.com/17-11-26/48817546.jpg)
+![](http://img.wenchao.wang/17-11-26/48817546.jpg)
 
 ### 以 *PlusCal* 简化欧几里得算法
 在定义中，已经介绍了 *PlusCal*语言是 *TLA+* 的更适用于 C/C++, Java 工程师的一种语言。可以通过类似 Java 的语法编写程序，然后由系统自动转化为 *TLA+*，更为友好，效率也更高。
@@ -328,7 +328,7 @@ Termination == <>(pc = "Done")
 \* Created Sat Oct 14 15:40:30 CST 2017 by wangwc
 ```
 
-![](http://nutslog.qiniudn.com/17-11-26/75450839.jpg)
+![](http://img.wenchao.wang/17-11-26/75450839.jpg)
 
 顺利获得翻译后的 *TLA+* 代码。此处不再对 *TLA+* 语法展开解释了，具体可以参考以下书目
 - *Principles and Specifications of Concurrent Systems*，Leslie Lamport，2015
@@ -342,7 +342,7 @@ Termination == <>(pc = "Done")
 ### *TLC* 的原理
 最后，介绍一下 *TLA+* 的核心功能，*TLC Model Checker* 的原理见下图：
 
-![](http://nutslog.qiniudn.com/17-11-26/44607114.jpg)
+![](http://img.wenchao.wang/17-11-26/44607114.jpg)
 
 *TLC* 维护着两个数据结构
 - 一个用来保存所有已知状态的集合 seen, 上图红绿点

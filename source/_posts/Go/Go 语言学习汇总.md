@@ -144,7 +144,7 @@ slice8 := slice[2:3:4] // 长度为 3 - 2 = 1， 容量为 4 - 2 = 2
 
 切片的头部会占用 3 个 uint 长度，分别存储底层数组指针、长度、容量。
 
-![](http://nutslog.qiniudn.com/18-3-13/33943255.jpg)
+![](http://img.wenchao.wang/18-3-13/33943255.jpg)
 
 <br/>
 

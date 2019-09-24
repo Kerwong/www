@@ -8,7 +8,7 @@ tags:
 - JDK
 ---
 
-![](http://nutslog.qiniudn.com/17-5-17/20783500-file_1494988127341_466.jpg)
+![](http://img.wenchao.wang/17-5-17/20783500-file_1494988127341_466.jpg)
 
 在 Java 编程中，常常需要一些数据结构用来保存我们所需要的数据。在 `C /CPP` 中，只提供数组和链表的实现，但诸如一些常用的稍复杂的数据结构，例如`Heap` 、`Stack` 、`Queue` 、`Hash` 表等，都需要自己编码实现，虽然灵活度很高，但在一些常用的结构上再浪费时间，就没有必要了。而 JDK ，则提供了一个不少实用的容器，供开发者使用，本文将详细解析一下 JDK 中提供的容器。
 
@@ -22,7 +22,7 @@ Java 容器类库用途是“保存对象”，其中可以划为两个不同概
   - Queue ：按照队列规则，来确定对象产生的顺序
 2. **Map** ：也被成为关联数组，用来保存一组成对的“键值对”对象，允许通过键来查找值。
 
-![](http://nutslog.qiniudn.com/17-5-17/63028248-file_1495001438479_156aa.png)
+![](http://img.wenchao.wang/17-5-17/63028248-file_1495001438479_156aa.png)
 <br/>
 
 ## List
@@ -34,7 +34,7 @@ List 的接口实现有 ArrayList 、LinkedList ，它们都按照顺序保存�
 - `Vector` （不再使用）：矢量队列，和 ArrayList 一样，也是动态数组实现，区别在于 Vector  是线程安全的，而 ArrayList  不是。
 - `Stack` （不再使用）：栈，继承自 Vector ，特点是“后进先出” （LIFO ），线程安全。和 LinkedList 一样，可以由 LinkedList 实现。
 
-![](http://nutslog.qiniudn.com/17-5-17/57392064-file_1494989548600_1776c.png)
+![](http://img.wenchao.wang/17-5-17/57392064-file_1494989548600_1776c.png)
 <br/>
 
 ### 关于容量
@@ -164,7 +164,7 @@ Set  具有与 Collection  完全一样的接口。Set  是基于对象的值来
 - `LinkedHashSet` ：有序，使用链表维护元素的插入，同时使用了 Hash 来提高查询速度。
 - `TreeSet` ：有序，使用红黑树维护数据的顺序。
 
-![](http://nutslog.qiniudn.com/17-5-17/76653471-file_1494990801304_17fe0.png)
+![](http://img.wenchao.wang/17-5-17/76653471-file_1494990801304_17fe0.png)
 <br/>
 
 ### 关于容量/数据结构
@@ -274,7 +274,7 @@ Queue  队列，是一个典型的**先进先出 FIFO  容器**，即从容器�
 - `ArrayDeque` ：通过**数组实现 Queue  的先进先出，作为 Queue  效率上优于 LinkedList ，作为 stack ，效率上优于 Stack （因为 Stack 底层会加锁）**，若要实现 Queue ，推荐优先使用 ArrayDeque ，而不是 LinkedList
 - `PriorityQueue` ：优先队列，**数组结构，平衡二叉树实现**，不再是先进先出，而是赋予元素优先级，声明下一个弹出元素是最高优先级的元素。**不允许 null 元素存在**。
 
-![](http://nutslog.qiniudn.com/17-5-17/31468936-file_1495000986510_17260.png)
+![](http://img.wenchao.wang/17-5-17/31468936-file_1495000986510_17260.png)
 <br/>
 
 ### 关于容量
@@ -479,7 +479,7 @@ public E pollLast() {
 }
 ```
 
-![](http://nutslog.qiniudn.com/17-5-17/78761217-file_1494991695088_bcb2.jpg "arraydeque工作原理")
+![](http://img.wenchao.wang/17-5-17/78761217-file_1494991695088_bcb2.jpg "arraydeque工作原理")
 
 下表为 ArrayDeque  针对不同接口实现的方法
 
@@ -532,7 +532,7 @@ public boolean offer(E e) {
 }
 ```
 
-![](http://nutslog.qiniudn.com/17-5-17/25938065-file_1495000803392_ce45.jpg "堆插入")
+![](http://img.wenchao.wang/17-5-17/25938065-file_1495000803392_ce45.jpg "堆插入")
 
 PriorityQueue  中的删除
 ```Java
@@ -550,7 +550,7 @@ public E poll() {
 }
 ```
 
-![](http://nutslog.qiniudn.com/17-5-17/492735-file_1495000849424_11ae6.jpg "堆删除")
+![](http://img.wenchao.wang/17-5-17/492735-file_1495000849424_11ae6.jpg "堆删除")
 <br/>
 
 ### 关于查询
@@ -604,7 +604,7 @@ Map ，即映射表，或关联数组。Map  的基本思想是维护键-值关�
 - `WeakHashMap` ：弱键（weak key） 映射，允许释放映射所指向的对象；这是为解决某类特殊问题而设计的。如果映射之外没有引用指向某个 Key ，则该 Key  将被 GC  回收
 - `IdentityHashMap` ：使用 ==  代替 equals() 对 Key  进行比较特殊的散列映射。为解决特殊问题设计。
 
-![](http://nutslog.qiniudn.com/17-5-17/23948756-file_1495001398540_17432.png)
+![](http://img.wenchao.wang/17-5-17/23948756-file_1495001398540_17432.png)
 
 <br/><br/>
 

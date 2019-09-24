@@ -49,10 +49,10 @@ IDE  下的 Maven  集成，可以参考 http://maven.apache.org/ide.html
 > http://m2eclipse.sonatype.org/sites/m2e
 
 Jetbrain  的话，注意两项配置，一是配置 Maven Home
-![](http://nutslog.qiniudn.com/17-5-17/58590535-file_1495023435493_b17f.png "IDEA Maven 配置")
+![](http://img.wenchao.wang/17-5-17/58590535-file_1495023435493_b17f.png "IDEA Maven 配置")
 
 二是需要在 Runner  下的 VM option  添加一行 `-Dmaven.multiModuleProjectDirectory=$M2_HOME`
-![](http://nutslog.qiniudn.com/17-5-17/85039761-file_1495024095027_87bf.png "maven vm")
+![](http://img.wenchao.wang/17-5-17/85039761-file_1495024095027_87bf.png "maven vm")
 <br/>
 
 # 开始 Maven 项目
@@ -63,7 +63,7 @@ Jetbrain  的话，注意两项配置，一是配置 Maven Home
 
 Step 1：File -> New -> Project... ，在左栏选择 Maven
 
-![](http://nutslog.qiniudn.com/17-5-17/58449633-file_1495024135848_54.png "Maven step 1")
+![](http://img.wenchao.wang/17-5-17/58449633-file_1495024135848_54.png "Maven step 1")
 
 
 
@@ -72,13 +72,13 @@ Step 1：File -> New -> Project... ，在左栏选择 Maven
 
 Step 2：输入 GroupId ，ArtifactId ，Version ，这三个字段，同时也是 maven  包坐标的三个字段，指向了唯一一个包。
 
-![](http://nutslog.qiniudn.com/17-5-17/81784400-file_1495024177606_14396.png "Maven step 2")
+![](http://img.wenchao.wang/17-5-17/81784400-file_1495024177606_14396.png "Maven step 2")
 
 
 
 Step 3（可选）：第一次创建 Maven  项目的话，需要配置选择 Maven  版本
 
-![](http://nutslog.qiniudn.com/17-5-17/49799708-file_1495024207143_e6ed.png "Maven step 3")
+![](http://img.wenchao.wang/17-5-17/49799708-file_1495024207143_e6ed.png "Maven step 3")
 
 在 《Maven 实战》一书中，作者强调了不推荐使用 IDE  自带的 Maven ，
 因为一是 IDE Bundled Maven  版本可能不稳定；

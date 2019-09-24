@@ -156,7 +156,7 @@ Scheduleing 部分的源码是比较清晰和简单的。
 
 Scheduleing 中最重要的类是 `ThreadPoolTaskScheduler` ，这是使用 schedule 时的默认的线程池，其类图如下：
 
-![](http://nutslog.qiniudn.com/18-2-27/41314782.jpg)
+![](http://img.wenchao.wang/18-2-27/41314782.jpg)
 
 在  `ThreadPoolTaskScheduler` 中定义了一些内部变量
 

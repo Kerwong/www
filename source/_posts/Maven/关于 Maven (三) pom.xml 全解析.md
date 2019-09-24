@@ -1,18 +1,18 @@
 ---
-title: 关于 Maven (三) POM.xml 分析
+title: 关于 Maven (三) POM.xml 配置详解
 comments: true
-date: 2017-05-17 21:22:56
+date: 2016-05-27 10:40:54
 tags:
 - Java
 - Maven
 - Spring
 ---
 
-# Maven 配置详解
-
 POM 代表项目对象模型。它是工作在 Maven 的基本单位。这是一个 XML 文件。它始终保存在该项目基本目录中的 pom.xml  文件。
 POM 包含的项目是使用 Maven 来构建的，以及它也包含各种配置信息。
 POM 也包含了目标和插件。在执行任务或目标时，Maven 会使用当前目录中的 POM。它读取POM，得到所需要的配置信息，然后执行目标。
+
+<!--more-->
 
 ```XML
 <!-- modelVersion 声明项目描述符遵循哪一个POM模型版本。模型本身的版本很少改变，虽然如此，但它仍然是必不可少的，这是为了当Maven引入了新的特性或者其他模型变更的时候，确保稳定性。-->

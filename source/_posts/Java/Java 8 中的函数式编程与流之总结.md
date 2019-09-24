@@ -191,7 +191,7 @@ List<String> names = menu.stream()              //←─从菜单获得流
 
 
 
-![](http://nutslog.qiniudn.com/18-1-7/51713297.jpg)
+![](http://img.wenchao.wang/18-1-7/51713297.jpg)
 
 > 上图摘自《Java in Action》4.2 流简介
 
@@ -576,9 +576,9 @@ public interface Collector<T, A, R> {
 }
 ```
 
-![顺序归约，图片摘自 Java8 In Action](http://nutslog.qiniudn.com/18-6-3/75270699.jpg)
+![顺序归约，图片摘自 Java8 In Action](http://img.wenchao.wang/18-6-3/75270699.jpg)
 
-![并行归约，摘自 Java8 In Action](http://nutslog.qiniudn.com/18-6-3/30974481.jpg)
+![并行归约，摘自 Java8 In Action](http://img.wenchao.wang/18-6-3/30974481.jpg)
 
 实现自定义的质数收集器
 

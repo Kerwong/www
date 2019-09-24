@@ -81,10 +81,11 @@ test:	dummy
 <br/>
 
 ## Maven
-![Maven](http://nutslog.qiniudn.com/16-12-21/5027494-file_1482291248230_a5fb.jpg?imageView2/2/w/300)
+![Maven](http://img.wenchao.wang/16-12-21/5027494-file_1482291248230_a5fb.jpg?imageView2/2/w/300)
 学习 Maven 的主要是通过研读许晓斌先生著的《Maven 实战》，此书对 Maven 的知识框架介绍的较为仔细，值得看一看。
  > Maven 能帮助我们自动化构建过程，从清理、编译、测试到生成报告，再到打包和部署。 
- > ——摘自《Maven 实战》1.1.2 节
+ >
+ > > ——摘自《Maven 实战》1.1.2 节
 
 Maven 的优点：
  - 跨平台
@@ -102,7 +103,7 @@ Maven 的优点：
 
 ## Ant
 
-![Ant](http://nutslog.qiniudn.com/16-12-21/16206312-file_1482291247993_8dbc.png?imageView2/2/w/300)
+![Ant](http://img.wenchao.wang/16-12-21/16206312-file_1482291247993_8dbc.png?imageView2/2/w/300)
 熟悉 make 的人，理解 Ant 应该不难。Ant 功能上与 make 极为类似，区别在于 Ant 大多用于 Java 的开发和构建，并在 make 基础上克服了 make 的一些缺陷。
 
 > Ant是纯Java语言编写的，所以具有很好的跨平台性。操作简单。Ant是由一个内置任务和可选任务组成的。Ant运行时需要一个XML文件(构建文件)。 Ant通过调用target树，就可以执行各种task。每个task实现了特定接口对象。
@@ -123,7 +124,7 @@ Ant 的优点：
 
 ## Gradle
 
-![Gradle](http://nutslog.qiniudn.com/16-12-21/91996412-file_1482291248119_8bf3.png?imageView2/2/w/300)
+![Gradle](http://img.wenchao.wang/16-12-21/91996412-file_1482291248119_8bf3.png?imageView2/2/w/300)
 
 Gradle 是我最不熟悉的构建工具了，是一个后起之秀，但做工程的都懂的，喜欢用老古董，`╮(╯_╰)╭`
 Gradle 结合了前两者的有点，并在其基础上做了很多改进。
@@ -163,9 +164,9 @@ Gradle 缺点：
 | 构建生命周期 | 未定义            | 未定义       | 较为简单，不可定制          | 较 Maven 更复杂，可定制                    |
 
 Maven 生命周期：
-![Maven 生命周期](http://nutslog.qiniudn.com/16-12-22/74202232-file_1482338418351_166d7.png "Maven 生命周期")
+![Maven 生命周期](http://img.wenchao.wang/16-12-22/74202232-file_1482338418351_166d7.png "Maven 生命周期")
 Gradle 生命周期：
-![Gradle 生命周期](http://nutslog.qiniudn.com/16-12-22/15119864-file_1482337176102_14757.png "Gradle 生命周期")
+![Gradle 生命周期](http://img.wenchao.wang/16-12-22/15119864-file_1482337176102_14757.png "Gradle 生命周期")
 
 <br/><br/>
 

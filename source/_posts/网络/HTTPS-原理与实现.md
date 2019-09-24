@@ -22,7 +22,7 @@ SSL  目前版本是 3.0，之后升级为了 `TLS（Transport Layer Security）
 ## 网络通信（握手过程）
 此图非常详尽的描述了 HTTPS 在通讯过程中的原理，总共分为 8 步。
 
-![Https 原理](http://nutslog.qiniudn.com/16-12-23/46844476-file_1482478921555_a8db.png "Https 原理")
+![Https 原理](http://img.wenchao.wang/16-12-23/46844476-file_1482478921555_a8db.png "Https 原理")
 
 
 ### STEP 1: 客户端发起HTTPS 请求
@@ -181,6 +181,8 @@ Secure Sockets Layer
 
 <br/>
 
+
+
 ### STEP 2: 服务端的配置
 
 采用HTTPS 协议的服务器必须要有一套数字证书，可以自己制作，也可以向组织申请。区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面。这套证书其实就是一对公钥和私钥。
@@ -297,10 +299,10 @@ Secure Sockets Layer
 <br/>
 
 ## SSL/TLS
-![TCP/IP协议栈中TLS各子协议和HTTP的关系](http://nutslog.qiniudn.com/16-12-23/41896347-file_1482479295543_e062.png "TCP/IP协议栈中TLS各子协议）和HTTP的关系")
+![TCP/IP协议栈中TLS各子协议和HTTP的关系](http://img.wenchao.wang/16-12-23/41896347-file_1482479295543_e062.png "TCP/IP协议栈中TLS各子协议）和HTTP的关系")
 
 HTTPS 可以认为是 HTTP + TLS。TLS 是传输层加密协议TLS 协议本身又是由 record 协议传输的，record 协议的格式如下图
-![general-format-of-all-TLS-records](http://nutslog.qiniudn.com/16-12-23/13708164-file_1482479427710_1095.png "general-format-of-all-TLS-records")
+![general-format-of-all-TLS-records](http://img.wenchao.wang/16-12-23/13708164-file_1482479427710_1095.png "general-format-of-all-TLS-records")
 
 TLS 协议主要有五种类型 Content Type：
 Content types

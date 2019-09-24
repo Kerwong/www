@@ -49,7 +49,7 @@ end algorithm
 \* Created Sat Oct 14 18:59:32 CST 2017 by wangwc
 ```
 
-![](http://nutslog.qiniudn.com/17-11-26/22388669.jpg?imageView2/0/w/440)
+![](http://img.wenchao.wang/17-11-26/22388669.jpg?imageView2/0/w/440)
 
 以上代码首先定义了三个变量，`alice_account = 10, bob_account = 10, money = 5`
 
@@ -131,11 +131,11 @@ MoneyInvariant == alice_account + bob_account = account_total
 2. 勾选 Deadlock
 3. 新增两个恒定量判断，`MoneyNotNegative, MoneyInvariant`
 
-![](http://nutslog.qiniudn.com/17-11-26/88522190.jpg?imageView2/0/w/500)
+![](http://img.wenchao.wang/17-11-26/88522190.jpg?imageView2/0/w/500)
 
 执行 *TLC*，结果如下：
 
-![](http://nutslog.qiniudn.com/17-11-26/87726795.jpg)
+![](http://img.wenchao.wang/17-11-26/87726795.jpg)
 
 *TLC* 报错，错误信息是违反了恒定量 MoneyInvariant。
 具体是指，当执行到 B 步骤时，`alice_account = 9，bob_account = 10`，而初始时的资金总额 
@@ -198,7 +198,7 @@ end algorithm *)
 
 执行 *TLC* 后得
 
-![](http://nutslog.qiniudn.com/17-11-26/24442384.jpg)
+![](http://img.wenchao.wang/17-11-26/24442384.jpg)
 
 可以看出，代码在执行时违反了断言 C，出现了 alice_account 金额小于 0 的情况。
 具体出现在第一线程执行到 Transfer， money = 1，第二线程执行到 C， money = 1，第三线程执行到 C，money = 10。此时全局变量 alice_account = -1， bob_account = 21.

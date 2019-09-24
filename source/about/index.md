@@ -21,7 +21,7 @@ comments: false
 
 # 关于我
 
-![我](http://nutslog.qiniudn.com/Author.jpg?imageView2/1/w/200/h/200/interlace/1 "摄于厦门海边")
+![我](http://img.wenchao.wang/Author.jpg?imageView2/1/w/200/h/200/interlace/1 "摄于厦门海边")
 
 毕业于西子湖畔一职业技术学院，学的软件工程。样样好奇，样样不精。
 毕业 N 年有余，期间离岗求学，终不可得。所幸还有点混饭吃的本事，在扬子江口找了一份糊口的工作。
